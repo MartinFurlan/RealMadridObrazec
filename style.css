@@ -28,15 +28,16 @@ body {
   top: 40px;
   left: 60px;
   font-size: 16px;
-  color: #4b5563;
+  color: grey;
   text-decoration: none;
   font-weight: 500;
   display: flex;
   align-items: center;
 }
 .back-link:hover {
-  color: #2563eb;
+  opacity: 0.9; 
   text-decoration: underline;
+  color: #3b82f6;
 }
 .title {
   text-align: center;
@@ -45,6 +46,31 @@ body {
   font-weight: 800;
   margin-top: 25px;
   font-family: Arial, Helvetica, sans-serif;
+}
+.mail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mail input {
+  width: 370px;
+  padding: 14px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  color: #374151;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+.mail input::placeholder {
+  color: #6b7280;
+}
+.mail input:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px #4f46e5;
 }
 .password {
   display: flex;
@@ -63,7 +89,7 @@ body {
 }
 .password input:focus {
   background-color: #ffffff;
-  box-shadow: 0 0 0 2px #3b82f6;
+  box-shadow: 0 0 0 2px #4f46e5; 
 }
 .password p {
   width: 340px;
@@ -89,7 +115,7 @@ body {
 }
 .name-fields input:focus {
   background-color: #ffffff;
-  box-shadow: 0 0 0 2px #3b82f6;
+  box-shadow: 0 0 0 2px #4f46e5;
 }
 .date-field,
 .zip-field {
@@ -110,8 +136,7 @@ body {
 }
 .date-field input:focus,
 .zip-field input:focus {
-  background-color: #ffffff;
-  box-shadow: 0 0 0 2px #3b82f6;
+  box-shadow: 0 0 0 2px #4f46e5;
 }
 .country-field {
   display: flex;
@@ -130,14 +155,13 @@ body {
   font-family: Arial, sans-serif;
 }
 .country-field select:focus {
-  background-color: #ffffff;
-  box-shadow: 0 0 0 2px #3b82f6;
+  box-shadow: 0 0 0 2px #4f46e5;
   color: #0f172a;
 }
 .phone-field {
   display: flex;
   justify-content: center;
-  gap:10px;
+  gap: 10px;
   margin-top: 15px;
 }
 .phone-field select,
@@ -156,8 +180,7 @@ body {
 }
 .phone-field select:focus,
 .phone-field input:focus {
-  background-color: white;
-  box-shadow: 0 0 0 2px #3b82f6;
+  box-shadow: 0 0 0 2px #4f46e5;
 }
 .crta {
   width: 400px;
@@ -174,12 +197,13 @@ body {
 }
 .text a,
 .text2 a {
-  color: #2563eb;
+  color: #3b82f6;
   text-decoration: none;
   font-weight: 500;
 }
 .text a:hover,
 .text2 a:hover {
+  opacity: 0.9;
   text-decoration: underline;
 }
 .continue-btn {
@@ -187,7 +211,7 @@ body {
   width: 90%;
   max-width: 400px;
   padding: 14px;
-  background: linear-gradient(90deg, #6366f1, #4f46e5);
+  background: linear-gradient(90deg, #3b82f6, #4f46e5);
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -229,57 +253,47 @@ body {
   font-size: 14px;
 }
 .footer-links a {
-  color: #4b5563;
+  color: grey; 
   text-decoration: none;
   font-weight: 500;
 }
 .footer-links a:hover {
-  color: #1d4ed8;
+  opacity: 0.9;
   text-decoration: underline;
+  color: #3b82f6;
 }
-
-/* Responsivnost */
+.swal2-confirm-custom {
+    background: linear-gradient(90deg, #3b82f6, #4f46e5) !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 14px 0 !important;
+    width: 90% !important;
+    max-width: 400px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+.swal2-confirm-custom:hover {
+    opacity: 0.9 !important;
+}
 @media (max-width: 480px) {
-  .back-link {
-    top: 20px;
-    left: 20px;
-    font-size: 14px;
-  }
-  .title {
-    font-size: 28px;
-    margin-top: 60px;
-  }
+  .back-link { top: 20px; left: 20px; font-size: 14px; }
+  .title { font-size: 28px; margin-top: 60px; }
   .password input,
   .date-field input,
   .zip-field input,
   .country-field select,
   .text,
-  .text2 {
-    width: 90%;
-    max-width: 370px;
-  }
-  .password p {
-    width: 88%;
-  }
-  .name-fields {
-    flex-direction: column;
-    width: 90%;
-  }
+  .text2 { width: 90%; max-width: 370px; }
+  .password p { width: 88%; }
+  .name-fields { flex-direction: column; width: 90%; }
   .name-fields input,
   .phone-field select,
-  .phone-field input {
-    width: 100%;
-  }
-  .phone-field {
-    flex-direction: column;
-    width: 90%;
-  }
-  .crta {
-    width: 90%;
-  }
-  .footer {
-    padding: 20px 0;
-  }
+  .phone-field input { width: 100%; }
+  .phone-field { flex-direction: column; width: 90%; }
+  .crta { width: 90%; }
+  .footer { padding: 20px 0; }
 }
 @media (max-width: 768px) {
   .password input,
@@ -287,15 +301,9 @@ body {
   .zip-field input,
   .country-field select,
   .text,
-  .text2 {
-    width: 85%;
-  }
+  .text2 { width: 85%; }
   .name-fields input,
   .phone-field select,
-  .phone-field input {
-    width: 48%;
-  }
-  .crta {
-    width: 80%;
-  }
+  .phone-field input { width: 48%; }
+  .crta { width: 80%; }
 }
