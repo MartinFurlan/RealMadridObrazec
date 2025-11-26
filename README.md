@@ -27,7 +27,7 @@
 ## Primer spletnih strani
 
 ### Originalna spletna stran
-![Originalna spletna stran](Slike/original.png)
+![Originalna spletna stran](original.png)
 
 ### Moja spletna stran
-![Moja spletna stran](Slike/spletna.png)
+![Moja spletna stran](spletna.png)
