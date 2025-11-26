@@ -26,10 +26,6 @@
 2024/25
 ## Primer spletnih strani
 
-## Primer spletnih strani
-
-## Primer spletnih strani
-
 ### Originalna spletna stran
 ![Originalna spletna stran](original.png)
 
