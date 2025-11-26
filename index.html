@@ -91,6 +91,7 @@
         const emailValue = emailInput.value.trim();
         const passwordValue = passwordInput.value.trim();
         const swalButtonClass = 'swal2-confirm-custom';
+
         if(emailValue === '' && passwordValue === '') {
             Swal.fire({
                 icon: 'error',
@@ -139,12 +140,23 @@
             });
             return;
         }
+
         Swal.fire({
             icon: 'success',
             title: 'All good!',
             text: 'Email and password are valid.',
             confirmButtonText: 'OK',
             customClass: { confirmButton: swalButtonClass }
+        });
+    });
+    const logo = document.querySelector('.glava .logo');
+    logo.addEventListener('click', function() {
+        Swal.fire({
+            icon: 'info',
+            title: 'Info',
+            text: 'Avtor Martin Furlan',
+            confirmButtonText: 'OK',
+            customClass: { confirmButton: 'swal2-confirm-custom' }
         });
     });
 </script>
