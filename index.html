@@ -102,6 +102,7 @@
             });
             return;
         }
+
         if(emailValue === '') {
             Swal.fire({
                 icon: 'error',
@@ -121,6 +122,7 @@
             });
             return;
         }
+
         if(passwordValue === '') {
             Swal.fire({
                 icon: 'error',
@@ -141,14 +143,25 @@
             return;
         }
 
-        Swal.fire({
-            icon: 'success',
-            title: 'All good!',
-            text: 'Email and password are valid.',
-            confirmButtonText: 'OK',
-            customClass: { confirmButton: swalButtonClass }
-        });
+        if(emailValue === 'test@test.test' && passwordValue === 'testtest') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                text: 'Email and password are correct.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed!',
+                text: 'Incorrect email or password.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
+            });
+        }
     });
+
     const logo = document.querySelector('.glava .logo');
     logo.addEventListener('click', function() {
         Swal.fire({
