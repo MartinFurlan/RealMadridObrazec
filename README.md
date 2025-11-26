@@ -3,7 +3,7 @@
 ## Features
 - Login works only with:  
   **Email:** `test@test.test`  
-  **Password:** `test`
+  **Password:** `testtest`
 - Full validation system:
   - Missing fields
   - Invalid email format
