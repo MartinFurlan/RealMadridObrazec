@@ -28,17 +28,12 @@
 
 ## Primer spletnih strani
 
-<div style="display: flex; gap: 20px;">
+## Primer spletnih strani
 
-  <div style="text-align: center;">
-    <img src="original.png" alt="Originalna spletna stran" width="300">
-    <p>Originalna spletna stran</p>
-  </div>
+### Originalna spletna stran
+![Originalna spletna stran](original.png)
 
-  <div style="text-align: center;">
-    <img src="spletna.png" alt="Moja spletna stran" width="300">
-    <p>Moja spletna stran</p>
-  </div>
+### Moja spletna stran
+![Moja spletna stran](spletna.png)
 
-</div>
 
