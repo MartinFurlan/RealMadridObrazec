@@ -205,6 +205,15 @@
                 showConfirmButton: false
             });
         });
+        const logo = document.querySelector('.glava .logo');
+        logo.addEventListener('click', function() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Info',
+                text: 'Avtor Martin Furlan',
+                confirmButtonText: 'OK'
+            });
+        });
     </script>
 </body>
 </html>
