@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="sl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Real Madrid CF | Log in </title>
+    <title>Real Madrid CF | Log in</title>
     <link rel="stylesheet" href="styleLogin.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
@@ -27,12 +26,20 @@
         <input type="text" id="email" name="email" placeholder="Email/Socio No./Madrista No." required>
     </div>
     
+    <div class="password">
+        <input type="password" id="password" placeholder="Password" required>
+    </div>
+    
     <div class="continue">
         <button id="continueBtn" class="continue-btn">Continue</button>
     </div>
 
     <div class="cant-login">
-        <a href=>Can't log in?</a>
+        <a href="#">Can't log in?</a>
+    </div>
+    
+    <div class="signup">
+        <a href="Registracija.html">Sign up</a>
     </div>
     
     <div class="line"></div>
@@ -51,27 +58,26 @@
             <a href="/privacy">here</a>.
         </p>
     </div>
-
+    
     <div class="footer">
         <img src="real.webp" alt="Real Madrid Logo" class="footer-logo">
         <p class="footer-text">Real Madrid © 2025. All rights reserved.</p>
-        <div class="footer-line"></div>
         <div class="footer-links">
-            <a href=>Legal notice</a>
+            <a href="#">Legal notice</a>
             <span>•</span>
-            <a href=>Cookies policy</a>
+            <a href="#">Cookies policy</a>
             <span>•</span>
-            <a href=>Privacy policy</a>
+            <a href="#">Privacy policy</a>
             <span>•</span>
-            <a href=>realmadrid.com</a>
+            <a href="#">realmadrid.com</a>
         </div>
     </div>
 
-<!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
     const continueBtn = document.getElementById('continueBtn');
 
     function validateEmail(email) {
@@ -80,35 +86,66 @@
     }
 
     continueBtn.addEventListener('click', function(event) {
-        event.preventDefault(); // prepreči default klik
+        event.preventDefault(); 
 
         const emailValue = emailInput.value.trim();
-
+        const passwordValue = passwordInput.value.trim();
+        const swalButtonClass = 'swal2-confirm-custom';
+        if(emailValue === '' && passwordValue === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Please enter your email and password.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
+            });
+            return;
+        }
         if(emailValue === '') {
             Swal.fire({
                 icon: 'error',
-                title: 'Napaka',
-                text: 'Prosim vnesite e-poštni naslov.'
+                title: 'Error',
+                text: 'Please enter an email address.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
             });
+            return;
         } else if(!validateEmail(emailValue)) {
             Swal.fire({
                 icon: 'error',
-                title: 'Neveljaven e-mail',
-                text: 'Prosim vnesite pravilen e-poštni naslov.'
+                title: 'Invalid Email',
+                text: 'Please enter a valid email address.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
             });
-        } else {
-            // Če je e-mail pravilen
-            Swal.fire({
-                icon: 'success',
-                title: 'V redu!',
-                text: 'E-pošta je pravilna. Preusmerjam vas naprej...',
-                timer: 2000,
-                timerProgressBar: true,
-                showConfirmButton: false
-            }).then(() => {
-                window.location.href = 'Registracija.html';
-            });
+            return;
         }
+        if(passwordValue === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Please enter a password.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
+            });
+            return;
+        } else if(passwordValue.length < 8 || passwordValue.length > 24) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Password',
+                text: 'Password must be between 8 and 24 characters.',
+                confirmButtonText: 'OK',
+                customClass: { confirmButton: swalButtonClass }
+            });
+            return;
+        }
+        Swal.fire({
+            icon: 'success',
+            title: 'All good!',
+            text: 'Email and password are valid.',
+            confirmButtonText: 'OK',
+            customClass: { confirmButton: swalButtonClass }
+        });
     });
 </script>
 
