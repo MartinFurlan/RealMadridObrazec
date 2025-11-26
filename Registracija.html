@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
@@ -17,6 +16,10 @@
     <a href="index.html" class="back-link">← Back</a>
 
     <h1 class="title">Become a<br>Madridista</h1>
+    
+    <div class="mail">
+        <input type="text" id="email" name="email" placeholder="Email" required>
+    </div>
 
     <div class="password">
         <input type="password" id="password" placeholder="Create your password" required>
@@ -24,16 +27,16 @@
     </div>
     
     <div class="name-fields">
-        <input type="text" placeholder="Name" required>
-        <input type="text" placeholder="Last name" required>
+        <input type="text" id="firstName" placeholder="Name" required>
+        <input type="text" id="lastName" placeholder="Last name" required>
     </div>
     
     <div class="date-field">
-        <input type="date" required>
+        <input type="date" required onkeydown="return false;" oninput="return false;">
     </div>
     
     <div class="zip-field">
-        <input type="text" placeholder="Zip code" required>
+        <input type="text" placeholder="Zip code" required id="zipCode" maxlength="4">
     </div>
     
     <div class="country-field">
@@ -61,7 +64,7 @@
             <option value="+49">🇩🇪 +49 Germany</option>
         </select>
 
-        <input type="tel" placeholder="Phone number" required>
+        <input type="tel" placeholder="Phone number" required pattern="[0-9]{9}" id="phoneNumber" maxlength="9">
     </div>
     
     <hr class="crta">
@@ -100,46 +103,108 @@
         </div>
     </div>
 
-<!-- SweetAlert2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    const continueBtn = document.getElementById('continueBtn');
-    const passwordInput = document.getElementById('password');
+    <script>
+        const continueBtn = document.getElementById('continueBtn');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const phoneInput = document.getElementById('phoneNumber');
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const zipCode = document.getElementById('zipCode');
 
-    function validatePassword(password) {
-        // Dolžina 8-24, vsaj ena črka, le alfanumerični znaki
-        const re = /^(?=.*[A-Za-z])[A-Za-z0-9]{8,24}$/;
-        return re.test(password);
-    }
+        const requiredFields = [
+            emailInput,
+            passwordInput,
+            firstName,
+            lastName,
+            document.querySelector('.date-field input'),
+            zipCode,
+            document.querySelector('.country-field select'),
+            document.querySelector('.phone-field select'),
+            phoneInput
+        ];
 
-    continueBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        const password = passwordInput.value.trim();
-
-        if(password === '') {
-            Swal.fire('Napaka', 'Prosim vnesite geslo.', 'error');
-            return;
-        }
-
-        if(!validatePassword(password)) {
-            Swal.fire('Napaka', 'Geslo mora imeti 8-24 alfanumeričnih znakov.', 'error');
-            return;
-        }
-
-        Swal.fire({
-            icon: 'success',
-            title: 'V redu!',
-            text: 'Geslo je veljavno. Nadaljujemo...',
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: false
-        }).then(() => {
-            // Tukaj lahko pošlješ obrazec ali preusmeriš uporabnika
-            // window.location.href = 'nextpage.html';
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length > 9) this.value = this.value.slice(0, 9);
         });
-    });
-</script>
 
+        [firstName, lastName].forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.replace(/[^A-Za-zČčŠšŽžÁÉÍÓÚáéíóúÄäÖöÜü ]/g, '');
+            });
+        });
+
+        zipCode.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length > 4) this.value = this.value.slice(0, 4);
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePassword(password) {
+            const re = /^(?=.*[A-Za-z])[A-Za-z0-9]{8,24}$/;
+            return re.test(password);
+        }
+
+        function validatePhone(phone) {
+            return /^[0-9]{9}$/.test(phone);
+        }
+
+        function validateZip(zip) {
+            return /^[0-9]{4}$/.test(zip);
+        }
+
+        continueBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            let allFilled = true;
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) allFilled = false;
+            });
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const zip = zipCode.value.trim();
+
+            if (!allFilled) {
+                Swal.fire('Error', 'Please fill in all required fields.', 'error');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                Swal.fire('Error', 'Please enter a valid email address.', 'error');
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                Swal.fire('Error', 'Password is not valid. Enter 8–24 alphanumeric characters.', 'error');
+                return;
+            }
+
+            if (!validatePhone(phone)) {
+                Swal.fire('Error', 'Phone number must contain exactly 9 digits.', 'error');
+                return;
+            }
+
+            if (!validateZip(zip)) {
+                Swal.fire('Error', 'ZIP code must contain exactly 4 digits.', 'error');
+                return;
+            }
+            Swal.fire({
+                icon: 'success',
+                title: 'All good!',
+                text: 'All data is entered correctly. Continuing...',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        });
+    </script>
 </body>
 </html>
